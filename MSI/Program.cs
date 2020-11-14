@@ -11,15 +11,23 @@ namespace MSI
             var prolog = new PrologEngine(false);
             prolog.BasicIO = new DosIO();
 
-            prolog.CreateFact("test", new BaseTerm[] { new DecimalTerm(1.0) });
 
-            prolog.
 
-            //prolog.Consult(@"..\..\..\choroby.pl");
+            Console.WriteLine("Jaki masz katar?");
+            string katar = Console.ReadLine();
+            prolog.CreateFact("katar", new[]{ new AtomTerm(katar)});
 
-            var solution = prolog.GetFirstSolution("test(1.0).");
 
-            Console.WriteLine(solution.Solved);
+
+
+            prolog.Consult(@"msi.pl");
+
+            var solution = prolog.GetFirstSolution("sprawdzchorobe(X).");
+
+           //var v = prolog.GetVariable("X");
+
+            
+            //Console.WriteLine(v);
         }
     }
 }

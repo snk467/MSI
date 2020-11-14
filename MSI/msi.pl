@@ -4,60 +4,56 @@ wartoscsymptomu(sredni, 0.5).
 wartoscsymptomu(silny, 0.75).
 wartoscsymptomu(bardzosilny, 1).
 
-objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, covid) :-
-wartoscsymptomu(Katar, A), A =:= 0,
-wartoscsymptomu(Kaszel, B), B >= 0.8, 
-wartoscsymptomu(Goraczka, C), C >= 0.5,
-wartoscsymptomu(Dreszcze, D), D >= 0.8,
-wartoscsymptomu(BolGlowy, E), E >= 0.8,
-wartoscsymptomu(BolMiesni, F), F >= 0.8,
-wartoscsymptomu(Pocenie, G), G =:= 0,
-wartoscsymptomu(BrakApetytu, H), H >= 0.6,
-wartoscsymptomu(Wymioty, I), I >= 0.9,
-wartoscsymptomu(ZaburzeniaWechu, J), J >= 0.6.
+zapytaj_katar :- writeln('Jaki masz katar?'), read(A), wartoscsymptomu(A, X), asserta(katar(X)).
+zapytaj_kaszel :- writeln('Jaki masz kaszel?'), read(A), wartoscsymptomu(A, X), asserta(kaszel(X)).
+zapytaj_goraczka :- writeln('Jaka masz goraczke?'), read(A), wartoscsymptomu(A, X), asserta(goraczka(X)).
+zapytaj_dreszcze :- writeln('Jakie masz dreszcze?'), read(A), wartoscsymptomu(A, X), asserta(dreszcze(X)).
+zapytaj_bol_glowy :- writeln('Jaki masz bol glowy?'), read(A), wartoscsymptomu(A, X), asserta(bol_glowy(X)).
+zapytaj_bol_miesni :- writeln('Jaki masz bol miesni?'), read(A), wartoscsymptomu(A, X), asserta(bol_miesni(X)).
+zapytaj_pocenie :- writeln('Jakie masz pocenie?'), read(A), wartoscsymptomu(A, X), asserta(pocenie(X)).
+zapytaj_brak_apetytu :- writeln('Jaki masz brak apetytu?'), read(A), wartoscsymptomu(A, X), asserta(brak_apetytu(X)).
+zapytaj_wymioty :- writeln('Jakie masz wymioty?'), read(A), wartoscsymptomu(A, X), asserta(wymioty(X)).
+zapytaj_zaburzenia_wechu :- writeln('Jakie masz zaburzenia wechu?'), read(A), wartoscsymptomu(A, X), asserta(zaburzenia_wechu(X)).
 
-objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu,
-Wymioty, ZaburzeniaWechu, gruzlica) :-
-wartoscsymptomu(Katar, A), A =:= 0,
-wartoscsymptomu(Kaszel, B), B >= 0.9, 
-wartoscsymptomu(Goraczka, C), C >= 0.75,
-wartoscsymptomu(Dreszcze, D), D >= 0.5,
-wartoscsymptomu(BolGlowy, E), E >= 0.4,
-wartoscsymptomu(BolMiesni, F), F >= 0.2,
-wartoscsymptomu(Pocenie, G), G =:= 0.6,
-wartoscsymptomu(BrakApetytu, H), H >= 0.6,
-wartoscsymptomu(Wymioty, I), I =:= 0,
-wartoscsymptomu(ZaburzeniaWechu, J), J =:= 0.
+srednia(A, B, C, D, E, F, G, H, I, J, Z) :- Z = ((A + B + C + D + E + F + G + H + I + J)/10).
 
-srednia_chorob(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu,
-Wymioty, ZaburzeniaWechu, Z) :-
-wartoscsymptomu(Katar, A),
-wartoscsymptomu(Kaszel, B),
-wartoscsymptomu(Goraczka, C),
-wartoscsymptomu(Dreszcze, D),
-wartoscsymptomu(BolGlowy, E),
-wartoscsymptomu(BolMiesni, F),
-wartoscsymptomu(Pocenie, G),
-wartoscsymptomu(BrakApetytu, H),
-wartoscsymptomu(Wymioty, I),
-wartoscsymptomu(ZaburzeniaWechu, J),
-srednia(A, B, C, D, E, F, G, H, I, J, K), Z = K.
+choroba(covid) :-
+katar(Katar), Katar =:= 0,
+kaszel(Kaszel), Kaszel >= 0.75,
+goraczka(Goraczka), Goraczka >= 0.5, 
+dreszcze(Dreszcze), Dreszcze >= 0.8,
+bol_glowy(BolGlowy), BolGlowy >= 0.8,
+bol_miesni(BolMiesni), BolMiesni >= 0.8,
+pocenie(Pocenie), Pocenie =:= 0,
+brak_apetytu(BrakApetytu), BrakApetytu >= 0.6,
+wymioty(Wymioty), Wymioty >= 0.9,
+zaburzenia_wechu(ZaburzeniaWechu), ZaburzeniaWechu >= 0.6,
+srednia(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Nasilenie),
+(Nasilenie >= 0.8 -> writeln('Masz silny covid') ; writeln('Masz slaby covid.')).
 
-srednia(A, B, C, D, E, F, G, H, I, J, Z) :-
-Z = ((A + B + C + D + E + F + G + H + I + J)/10).
+choroba(gruzlica) :-
+katar(Katar), Katar =:= 0,
+kaszel(Kaszel), Kaszel >= 0.9,
+goraczka(Goraczka), Goraczka >= 0.75, 
+dreszcze(Dreszcze), Dreszcze >= 0.5,
+bol_glowy(BolGlowy), BolGlowy >= 0.4,
+bol_miesni(BolMiesni), BolMiesni >= 0.2,
+pocenie(Pocenie), Pocenie >= 0.6,
+brak_apetytu(BrakApetytu), BrakApetytu >= 0.6,
+wymioty(Wymioty), Wymioty =:= 0,
+zaburzenia_wechu(ZaburzeniaWechu), ZaburzeniaWechu =:= 0,
+srednia(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Nasilenie),
+(Nasilenie >= 0.5 -> writeln('Masz silna gruzlice') ; writeln('Masz slaba gruzlice.')).
 
-choroba(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, slabyCOVID) :- 
-objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Y),
-Y =:= covid,
-srednia_chorob(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Z),
-Z < 0.8,
-write('Masz slaby covid'), nl.
-
-choroba(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu,
-Wymioty, ZaburzeniaWechu, silnyCOVID) :- objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Y), Y = COVID, srednia_chorob(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Z), Z >= 0.8, write('Masz silny covid'), nl.
-
-choroba(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu,
-Wymioty, ZaburzeniaWechu, slabaGruzlica) :- objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Y), Y = Gruzlica, srednia_chorob(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Z), Z < 0.5, write('Masz slaba gruzlice'), nl.
-
-choroba(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu,
-Wymioty, ZaburzeniaWechu, silnaGruzlica) :- objawy(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Y), Y = Gruzlica, srednia_chorob(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Z), Z >= 0.5, write('Masz mocna gruzlice'), nl.
+sprawdzchorobe(X) :- 
+zapytaj_katar,
+zapytaj_kaszel,
+zapytaj_goraczka,
+zapytaj_dreszcze,
+zapytaj_bol_glowy,
+zapytaj_bol_miesni,
+zapytaj_pocenie,
+zapytaj_brak_apetytu, 
+zapytaj_wymioty,
+zapytaj_zaburzenia_wechu,
+choroba(X), !.
