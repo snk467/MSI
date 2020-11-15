@@ -1,5 +1,5 @@
 srednia(A, B, C, D, E, F, G, H, I, J, Z) :- Z is ((A + B + C + D + E + F + G + H + I + J)/10).
-
+%TODO: dodaæ resztê chorób, sprawdziæ czy warunki na atrybutach siê zgadzaj¹
 choroba(covid, Nasilenie) :-
 katar(Katar), Katar =:= 0,
 kaszel(Kaszel), Kaszel >= 0.75,

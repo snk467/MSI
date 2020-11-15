@@ -10,9 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="choroby.pl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="msi.pl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
