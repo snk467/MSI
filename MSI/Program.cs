@@ -16,7 +16,7 @@ namespace MSI
 
             prolog.Consult(@"msi.pl");
 
-            var solution = prolog.GetFirstSolution("sprawdzchorobe(Choroba, Nasilenie).");
+            var solution = prolog.GetFirstSolution(query: "sprawdzchorobe(Choroba, Nasilenie).");
 
             double? intensificationValue;
             try
@@ -31,7 +31,8 @@ namespace MSI
 
             Diseases? diseaseValue;
             try
-            { 
+            {
+                var choroba = prolog.GetVariable("Choroba");
                 string disease = prolog.GetVariable("Choroba").ToString();
                 diseaseValue = (Diseases)Enum.Parse(typeof(Diseases), disease, true);
             }

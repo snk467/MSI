@@ -86,24 +86,75 @@ namespace MSI
             Console.WriteLine();
             Console.WriteLine("Diagnoza:");
 
-            //TODO: Dodać tutaj uwzględnie nasilenia choroby
-            //TODO: Dodać porady medyczne
             switch (disease)
             {
                 case Diseases.COVID:
-                    Console.WriteLine("Masz covid.");
+                    if (intensification < 0.8)
+                    {
+                        Console.WriteLine("Masz słabe objawy COVID'a.");
+                        Console.WriteLine("Nie wychodź z domu, unikaj kontaktu z domownikami, dużo odpoczywaj. W przypadku gwałtownego pogorszenia" +
+                            "  stanu zdrowia niezwłocznie zadzwoń do stacji sanitarno-epidemiologicznej.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Masz silne objawy COVID'a.");
+                        Console.WriteLine("Niezwłocznie zadzwoń do stacji sanitarno-epidemiologicznej lub na numer alaromowy, jesli " +
+                            " jeśli Twój stan gwałtonie się pogarsza.");
+                    }
                     break;
                 case Diseases.Gruzlica:
-                    Console.WriteLine("Masz gruźlicę.");
+                    if (intensification < 0.5)
+                    {
+                        Console.WriteLine("Masz słabe objawy gruźlicy. Skontaktuj się z lekarzem pierwszego kontaktu i unikaj kontaktu z innymi osobami");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Masz silne objawy gruźlicy. Niezwłocznie skontaktuj się z lekarzem pierwszego kontaktu i wykonaj badania." +
+                            "Unikaj kontaktu z innymi osobami.");
+
+                    }
                     break;
                 case Diseases.ZapaleniePluc:
-                    Console.WriteLine("Masz zapalenie płuc.");
+                    if (intensification < 0.6)
+                    {
+                        Console.WriteLine("Masz słabe objawy zapalenia płuc.");
+                        Console.WriteLine("Skontaktuj się z lekarzem pierwszego kontaktu, który zadecyduje, czy będziesz mógł leczyć się w domu, " +
+                            "czy zostaniesz skierowany do szpitala.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Masz silne objawy zapalenia płuc.");
+                        Console.WriteLine("Skontaktuj się z lekarzem pierwszego kontaktu, który zadecyduje, czy będziesz mógł leczyć się w domu, " +
+                            "czy zostaniesz skierowany do szpitala. Jeśli masz zbyt duże problemy z oddychaniem, zadzwoń na numer alarmowy");
+                    }
                     break;
                 case Diseases.Przeziebienie:
-                    Console.WriteLine("Masz przeziębienie.");
+                    if (intensification < 0.7)
+                    {
+                        Console.WriteLine("Masz słabe objawy przeziębienia.");
+                        Console.WriteLine("Nie wychodź z domu, unikaj kontaktu z innymi ludźmi i pij dużo płynów. Suplementuj witaminę C, a " +
+                            "jeśli Twoje objawy się nasilają, zażyj paracetamolu.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Masz silne objawy przeziębienia.");
+                        Console.WriteLine("Nie wychodź z domu, unikaj kontaktu z innymi ludźmi i pij dużo płynów. Zażywaj ibuprofenum, a " +
+                            "jeśli Twoje objawy się nasilają, skontaktuj się z lekarzem pierwszego kontaktu.");
+                    }
                     break;
                 case Diseases.Grypa:
-                    Console.WriteLine("Masz grypę.");
+                    if (intensification < 0.6)
+                    {
+                        Console.WriteLine("Masz słabe objawy grypy.");
+                        Console.WriteLine("Nie wychodź z domu, unikaj kontaktu z innymi ludźmi i dużo odpoczywaj. Jeśli Twoje " +
+                            "objawy nasilają się, skontaktuj się z lekarzem pierwszego kontaktu.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Masz silne objawy grypy.");
+                        Console.WriteLine("Nie wychodź z domu, unikaj kontaktu z innymi ludźmi. Skontaktuj się z lekarzem pierwszego " +
+                            "kontaktu w celu wypisania antybiotyku.");
+                    }
                     break;
             }
 
