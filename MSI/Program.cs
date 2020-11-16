@@ -50,6 +50,8 @@ namespace MSI
                 Console.WriteLine("Podczas działania programu wystąpił błąd: ");
                 Console.WriteLine(e.Message);
             }
+
+            Console.ReadLine();
         }
     }
 }
