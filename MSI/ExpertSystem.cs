@@ -63,24 +63,17 @@ namespace MSI
             WriteDefaultAnswers2();
             prolog.CreateFact("zaburzenia_wechu", new[] { new DecimalTerm(ReadAnswer()) });
         }
-        public void WriteResult(Diseases? disease, double? intensification, bool diseaseFound)
+        public void WriteResult(Diseases? disease, double? intensification, bool solved)
         {
-            if (!diseaseFound)
+            if (!solved || (disease is null && !(intensification is null)))
             {
                 Console.WriteLine("Według naszej wiedzy medycznej jesteś zdrowy lub masz nieznaną chorobę. :)");
                 return;
             }
 
-            if (diseaseFound && (disease is null || intensification is null))
+            if (intensification is null)
             {
-                if (disease is null)
-                {
-                    throw new ArgumentNullException(nameof(disease));
-                }
-                else
-                {
-                    throw new ArgumentNullException(nameof(intensification));
-                }
+                throw new ArgumentNullException(nameof(intensification));
             }
 
             Console.WriteLine();
