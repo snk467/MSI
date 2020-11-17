@@ -26,7 +26,7 @@ wymioty(Wymioty), Wymioty =:= 0,
 zaburzenia_wechu(ZaburzeniaWechu), ZaburzeniaWechu =:= 0,
 srednia(Katar, Kaszel, Goraczka, Dreszcze, BolGlowy, BolMiesni, Pocenie, BrakApetytu, Wymioty, ZaburzeniaWechu, Nasilenie).
 
-choroba(zapalenie_pluc, Nasilenie) :-
+choroba(zapaleniePluc, Nasilenie) :-
 katar(Katar), Katar =:= 0,
 kaszel(Kaszel), Kaszel >= 0.8,
 goraczka(Goraczka), Goraczka >= 0.5,
